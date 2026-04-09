@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export function contaPalavras(texto) {
   const paragrafos = extraiParagrafos(texto)
   const contagem = paragrafos.flatMap((paragrafo) => {
