@@ -1,3 +1,4 @@
+import { autor } from "../models/Autor.js";
 import livro from "../models/Livro.js";
 
 class LivroController {
@@ -21,8 +22,19 @@ class LivroController {
     }
 
     static async cadastrarLivro(req, res) {
+        const novoLivro = req.body;
         try {
-            const novoLivro = await livro.create(req.body);
+            const autorEncontrado = await autor.findById(novoLivro.autor);
+            const editoraEncontrada = await editora.findById(novoLivro.editora);
+
+            if (!autorEncontrado) {
+                return res.status(404).json({ message: "Autor não encontrado" });
+            } else if (!editoraEncontrada) {
+                return res.status(404).json({ message: "Editora não encontrada" });
+            }
+
+            const livroCompleto = { ...novoLivro, autor: { ... autorEncontrado._doc}, editora: { ... editoraEncontrada._doc } };
+            const livroCriado = await livro.create(livroCompleto);
             res.status(201).json({message: "Livro cadastrado com sucesso", livro: novoLivro});
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -44,6 +56,16 @@ class LivroController {
             const id = req.params.id;
             const livroExcluido = await livro.findByIdAndDelete(id);
             res.status(200).json({message: "Livro deletado com sucesso", livro: livroExcluido});
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    static async listarLivroPorPaginas(req, res) {
+        try {
+            const paginas = req.query.paginas;
+            const livroEncontrado = await livro.find({ paginas: paginas });
+            res.status(200).json(livroEncontrado);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
