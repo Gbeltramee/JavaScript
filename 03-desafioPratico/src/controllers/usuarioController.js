@@ -27,4 +27,4 @@ const buscarUsuarioPorId = async (req, res) => {
   }
 }
 
-export {listarUsuarios, criarUsuario, buscarUsuarioPorId}
+export { listarUsuarios, criarUsuario, buscarUsuarioPorId }

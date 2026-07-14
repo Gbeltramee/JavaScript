@@ -46,4 +46,4 @@ const deletarChamado = async (req, res) => {
 }
 
 
-export {listarChamados, criarChamado, buscarChamadoPorId, atualizarChamado, deletarChamado}
+export { listarChamados, criarChamado, buscarChamadoPorId, atualizarChamado, deletarChamado }

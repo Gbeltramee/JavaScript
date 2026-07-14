@@ -18,4 +18,4 @@ const criarCategoria = async (req, res) => {
   }
 }
 
-export {listarCategorias, criarCategoria}
+export { listarCategorias, criarCategoria }

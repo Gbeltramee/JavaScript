@@ -9,4 +9,4 @@ router.post("/chamados", criarChamado);
 router.put("/chamados/:id", atualizarChamado);
 router.delete("/chamados/:id", deletarChamado);
 
-export default router
+export default router;

@@ -7,4 +7,4 @@ router.get("/usuarios",listarUsuarios);
 router.get("/usuarios/:id",buscarUsuarioPorId);
 router.post("/usuarios",criarUsuario)
 
-export default router
+export default router;
