@@ -1,37 +1,15 @@
 const { Router } = require('express');
+const { getLivros, getLivro, postLivro, patchLivro, deleteLivro } = require('../controllers/livro');
+
 const router = Router();
 
-router.get('/', (req, res) => {
-  try {
-    throw new Error('Erro simulado'); // Simulando um erro para teste
-    res.send('Listagem de livros');
-  } catch (error) {
-    res.status(500).send('Erro ao listar livros');
-  }
-});
+router.get('/', getLivros);
+router.get('/:id', getLivro); 
 
-router.post('/', (req, res) => {
-  try {
-    res.send('Novo livro adicionado');
-  } catch (error) {
-    res.status(500).send('Erro ao adicionar livro');
-  }
-});
+router.post('/', postLivro);
 
-router.put('/:id', (req, res) => {
-  try {
-    res.send(`Livro com id ${req.params.id} atualizado`);
-  } catch (error) {
-    res.status(500).send('Erro ao atualizar livro');
-  }
-});
+router.patch('/:id', patchLivro);
 
-router.delete('/:id', (req, res) => {
-  try {
-    res.send(`Livro com id ${req.params.id} removido`);
-  } catch (error) {
-    res.status(500).send('Erro ao remover livro');
-  }
-});
+router.delete('/:id', deleteLivro);
 
 module.exports = router;
